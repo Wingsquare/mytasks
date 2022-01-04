@@ -18,8 +18,9 @@
 
 <body>
 	<form id="myform"  method="post">
-		<label>Task</label><input type="text" name="task"/><br />
-		<label>Remarks</label><textarea name="remarks" rows="5" cols="40"></textarea> <br />
+		<label>Task</label><input type="text" name="task_name"/><br />
+		<label>Task Start Time</label><input type="text" name="task_start_time"/><br />
+		<label>Remarks</label><textarea name="task_remarks" rows="5" cols="40"></textarea> <br />
 		<button id='btnCancel' type="button" onclick="cancelClicked()">Cancel</button>
 		<button id='btnCreate' type="button" onclick="createClicked()">Submit</button>
 	</form>
