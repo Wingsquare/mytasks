@@ -5,6 +5,9 @@
 
 <html>
     <body>
+
+        <a href="index.php"><h3>Home</h3></a>
+
         <?php
             // Create Task
             if(!empty($_POST['task_name']) && !empty($_POST['task_start_time'])){               
@@ -39,7 +42,7 @@
                         if($stmt = $mysqli->prepare($qry)){
                             if($stmt->bind_param("ssss", $task_name, $task_start_time_utc, $task_remarks, $task_current_time_utc)){
                                 if($stmt->execute()){
-                                    echo "Task is successfully added";
+                                    echo "<h5>Task is successfully added</h5>";
                                     echo "<br />";
                                 }else{
                                     echo "Query Execute Error : " . $stmt->error;
