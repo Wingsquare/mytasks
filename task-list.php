@@ -24,12 +24,12 @@
     function createTask(){
                 $task_name = $_POST['task_name'];
                 $task_start_time = $_POST['task_start_time'];
+                $task_start_time_utc = $_POST['task_start_time_utc'];
                 $task_remarks = $_POST['task_remarks'];
-                $task_current_time_utc = time(); //new \DateTime("now", new \DateTimeZone("UTC"));
+                $task_current_time_utc = time(); // UTC time in seconds
 
-                $task_start_time_utc = getUtcTimeStamp($task_start_time);
-
-                if($task_start_time_utc > 0){
+                
+                if(!empty($_POST['task_start_time_utc'])){
 
                     $qry = "insert into tasks(task_name, task_start_time, task_remarks, task_create_time) " .
                             "values(?,?,?,?)";
@@ -62,7 +62,12 @@
     }
 
     function showTasks(){
-        $qry =  " SELECT id, task_name, task_remarks, from_unixtime(task_start_time), task_create_time " .
+        if(!empty($_GET['offset'])){
+            $offset = $_GET['offset'];
+        }else{
+            $offset = 0;
+        }
+        $qry =  " SELECT id, task_name, task_remarks, task_start_time - interval $offset minute, task_create_time " .
                 " FROM tasks " .
                 " ORDER BY task_start_time ";
         
@@ -78,7 +83,7 @@
                         while($stmt->fetch()){
                             $slno++;
                             echo "<tr>";
-                            echo    "<td>$slno</td>" . 
+                            echo    "<td>$slno</td>" .
                                     "<td>$task_name</td>" .
                                     "<td>$task_remarks</td>" .
                                     "<td>$task_start_time</td>";
