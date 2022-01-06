@@ -5,8 +5,11 @@
 
 <html>
     <body>
-
-        <a href="index.php"><h3>Home</h3></a>
+        
+        <h3>
+            <a href="index.php">Home</a>
+            <a href="task-add.php">Create New Task</a>
+        </h3>
 
         <?php
             // Create Task
